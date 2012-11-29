@@ -2,7 +2,7 @@ class Card
   
   include Client
     
-  attr_reader :description, :colour, :buyer_tag, :date_sold, :cost, :no_charge, :date_made
+  attr_reader :id, :description, :colour, :buyer_tag, :date_sold, :cost, :no_charge, :date_made
   attr_accessor :server_id, :server_ref_id
   
   class << self
@@ -59,7 +59,7 @@ class Card
 
 
   def description=(item)
-    tokens = Tokeniser.new(item)
+    tokens = Tokeniser.new(item, :desc=>true)
     result = tokens.build
     self.add_tags = Noise.make_quiet(result[:string]) unless result[:string].empty?
     @description = result[:string].join(" ")
@@ -139,6 +139,7 @@ class Card
   def json
     puts "===> In To JSON"
     @representation = Jbuilder.encode do |j|
+#      j.id @id
       j.description @description
       j.date_made @date_made.to_s
       j.date_sold @date_sold.to_s if @date_sold

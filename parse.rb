@@ -34,8 +34,8 @@ end
 
 
 cards = []
-#f = File.open('cards.csv', 'r')
-f = File.open('small.csv', 'r')
+f = File.open('cards2.csv', 'r')
+#f = File.open('small2.csv', 'r')
 f.each do |line|
   c = Card.new(line)
   cards << c.parse
@@ -58,4 +58,3 @@ cards.each do |c|
   puts "====IN LOOP"
   c.create_resource
 end
-
